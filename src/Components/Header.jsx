@@ -22,12 +22,7 @@ const Header = () => {
         <Link className="btn btn-ghost normal-case text-xl" to="/">
           Home
         </Link>
-        {/* <Link className="btn btn-ghost normal-case text-xl" to="/login">
-          Login
-        </Link> */}
-        <Link className="btn btn-ghost normal-case text-xl" to="/register">
-          Register
-        </Link>
+
         {user && (
           <Link className="btn btn-ghost normal-case text-xl" to="/profile">
             Profile
@@ -36,17 +31,18 @@ const Header = () => {
         {user ? (
           <>
             <span>{user.email}</span> &nbsp;
-            <a
-              onClick={handleLogOut}
-              className="btn btn-xs normal-case"
-              href=""
-            >
-              Log Out
+            <a onClick={handleLogOut} className="btn normal-case text-xl">
+              Sign out
             </a>
           </>
         ) : (
           <Link className="btn btn-ghost normal-case text-xl" to="/login">
-            Login
+            Sign in
+          </Link>
+        )}
+        {!user && (
+          <Link className="btn normal-case text-xl" to="/register">
+            Sign up
           </Link>
         )}
       </div>

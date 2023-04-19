@@ -1,9 +1,22 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProviders";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
+
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+    .then(result => {
+      const loggedUser = result.user;
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -15,7 +28,7 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-        form.reset()
+        form.reset();
       })
       .catch((error) => {
         console.log(error.message);
@@ -24,7 +37,7 @@ const Login = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200">
-      <form onSubmit={handleLogin} className="hero-content flex-col ">
+      <form onSubmit={handleLogin} className="hero-content flex-col">
         <div className="text-center">
           <h1 className="text-5xl font-bold">Please Login !!</h1>
         </div>
@@ -61,6 +74,11 @@ const Login = () => {
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
+            </div>
+            <div className="mt-4">
+              <FontAwesomeIcon onClick={handleGoogleLogin} className="w-8 h-8" icon={faGoogle} />
+              &nbsp;&nbsp;&nbsp;
+              <FontAwesomeIcon className="w-8 h-8" icon={faGithub} />
             </div>
             <div className="mt-4">
               <Link
