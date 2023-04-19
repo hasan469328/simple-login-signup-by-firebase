@@ -7,13 +7,11 @@ const Header = () => {
 
   const handleLogOut = () => {
     logOut()
-    .then(() => {
-
-    })
-    .catch(error => {
-      console.error(error.message)
-    })
-  }
+      .then(() => {})
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
 
   return (
     <div className="navbar bg-primary text-primary-content flex justify-between items-center">
@@ -30,10 +28,19 @@ const Header = () => {
         <Link className="btn btn-ghost normal-case text-xl" to="/register">
           Register
         </Link>
+        {user && (
+          <Link className="btn btn-ghost normal-case text-xl" to="/profile">
+            Profile
+          </Link>
+        )}
         {user ? (
           <>
             <span>{user.email}</span> &nbsp;
-            <a onClick={handleLogOut} className="btn btn-xs normal-case" href="">
+            <a
+              onClick={handleLogOut}
+              className="btn btn-xs normal-case"
+              href=""
+            >
               Log Out
             </a>
           </>
